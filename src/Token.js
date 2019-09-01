@@ -10,6 +10,8 @@ export class Token {
   static COLON() { return new Token(Token.COLON); }
   static LEFT_PAREN() { return new Token(Token.LEFT_PAREN); }
   static RIGHT_PAREN() { return new Token(Token.RIGHT_PAREN); }
+  static LEFT_BRACE() { return new Token(Token.LEFT_BRACE); }
+  static RIGHT_BRACE() { return new Token(Token.RIGHT_BRACE); }
   static VALUE(value) { return new Token(Token.VALUE, value); }
   static OR() { return new Token(Token.OR); }
   static AND() { return new Token(Token.AND); }

@@ -21,14 +21,12 @@ export class Lexer {
         case (')' === char):
           tokens.push(Token.RIGHT_PAREN());
           break;
-        case ('{' === char): {
-          let value = '';
-          while (cursor.hasNext() && cursor.peek() !== '}') value += cursor.next();
-          if (!cursor.hasNext()) throw Lexer.Error('Unterminated "{"');
-          cursor.next();
-          tokens.push(Token.VALUE(value));
+        case ('{' === char):
+          tokens.push(Token.LEFT_BRACE());
           break;
-        }
+        case ('}' === char):
+          tokens.push(Token.RIGHT_BRACE());
+          break;
         case (/\s/.test(char)):
           tokens.push(Token.WHITE_SPACE(char));
           break;
@@ -51,6 +49,9 @@ export class Lexer {
           }
           break;
         }
+        default:
+          tokens.push(Token.VALUE(char));
+          break;
       }
     }
 

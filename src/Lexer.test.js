@@ -1,6 +1,6 @@
 import { Lexer } from './Lexer';
 import { Token } from './Token';
-import { deepStrictEqual, throws } from 'assert';
+import { deepStrictEqual } from 'assert';
 
 describe('Lexer', function() {
   it('should correctly parse empty string', function() {
@@ -23,6 +23,11 @@ describe('Lexer', function() {
     deepStrictEqual(Lexer.parse(')'), [Token.RIGHT_PAREN()]);
   });
 
+  it('should correctly parse braces', function() {
+    deepStrictEqual(Lexer.parse('{'), [Token.LEFT_BRACE()]);
+    deepStrictEqual(Lexer.parse('}'), [Token.RIGHT_BRACE()]);
+  });
+
   it('should correctly parse reserved keywords', function() {
     deepStrictEqual(Lexer.parse('or'), [Token.OR()]);
     deepStrictEqual(Lexer.parse('and'), [Token.AND()]);
@@ -34,8 +39,18 @@ describe('Lexer', function() {
   });
 
   it('should correctly parse value inside curly braces', function() {
-    deepStrictEqual(Lexer.parse('{foo}'), [Token.VALUE('foo')]);
-    deepStrictEqual(Lexer.parse('{foo bar}'), [Token.VALUE('foo bar')]);
+    deepStrictEqual(Lexer.parse('{foo}'), [
+      Token.LEFT_BRACE(),
+      Token.VALUE('foo'),
+      Token.RIGHT_BRACE()
+    ]);
+    deepStrictEqual(Lexer.parse('{foo bar}'), [
+      Token.LEFT_BRACE(),
+      Token.VALUE('foo'),
+      Token.WHITE_SPACE(' '),
+      Token.VALUE('bar'),
+      Token.RIGHT_BRACE()
+    ]);
   });
 
   it('should correctly parse query with field name and field value', function() {
@@ -47,7 +62,9 @@ describe('Lexer', function() {
     ]);
   });
 
-  it('should throw error for unmatched curly brace', function() {
-    throws(() => Lexer.parse('{foo'), /Unterminated "{"/);
+  it('should not throw exception if do not know symbol', function() {
+    deepStrictEqual(Lexer.parse('.'), [
+      Token.VALUE('.')
+    ]);
   });
 });
