@@ -10,7 +10,9 @@ export class Parser {
 
   static parse(query) {
     const tokens = Lexer.parse(query);
-    const cursor = Cursor.from(tokens);
+    const cursor = Cursor.from(tokens.filter((it) => {
+      return !Token.typeOf(it, Token.WHITE_SPACE);
+    }));
 
     return Query();
 

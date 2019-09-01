@@ -7,8 +7,11 @@ describe('Lexer', function() {
     deepStrictEqual(Lexer.parse(''), []);
   });
 
-  it('should correctly parse string with spaces only', function() {
-    deepStrictEqual(Lexer.parse('    '), []);
+  it('should preserve spaces', function() {
+    deepStrictEqual(Lexer.parse('  '), [
+      Token.WHITE_SPACE(' '),
+      Token.WHITE_SPACE(' ')
+    ]);
   });
 
   it('should correctly parse colon symbol', function() {
@@ -39,6 +42,7 @@ describe('Lexer', function() {
     deepStrictEqual(Lexer.parse('foo: bar'), [
       Token.VALUE('foo'),
       Token.COLON(),
+      Token.WHITE_SPACE(' '),
       Token.VALUE('bar')
     ]);
   });

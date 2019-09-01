@@ -6,6 +6,7 @@ export class Token {
     this.type = type;
     this.value = value;
   }
+  static WHITE_SPACE(value) { return new Token(Token.WHITE_SPACE, value); }
   static COLON() { return new Token(Token.COLON); }
   static LEFT_PAREN() { return new Token(Token.LEFT_PAREN); }
   static RIGHT_PAREN() { return new Token(Token.RIGHT_PAREN); }
