@@ -1,14 +1,14 @@
-import { Token } from './Token';
-import { Cursor } from './Cursor';
+import {Token} from './Token';
+import {Cursor} from './Cursor';
 
 export class Lexer {
-  static Error(message) {
+  static Error(message: string) {
     return Error(message);
   }
 
-  static parse(str) {
+  static parse(str: string): Array<Token> {
     const tokens = [];
-    const cursor = Cursor.from(str);
+    const cursor = Cursor.from<string>(str.split(''));
     while (cursor.hasNext()) {
       const char = cursor.next();
       switch (true) {

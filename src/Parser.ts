@@ -1,16 +1,16 @@
-import { Token } from './Token';
-import { Lexer } from './Lexer';
-import { Cursor } from './Cursor';
-import { Node } from './Node';
+import {Token} from './Token';
+import {Lexer} from './Lexer';
+import {Cursor} from './Cursor';
+import {Node} from './Node';
 
 export class Parser {
   static Error(message = 'Unexpected token') {
     return Error(message);
   }
 
-  static parse(query) {
+  static parse(query: string) {
     const tokens = Lexer.parse(query);
-    const cursor = Cursor.from(tokens.filter((it) => {
+    const cursor = Cursor.from<Token>(tokens.filter((it) => {
       return !Token.typeOf(it, Token.WHITE_SPACE);
     }));
 
@@ -76,12 +76,15 @@ export class Parser {
       return !cursor.hasNext();
     }
 
-    function match(type) {
-      if (check(type)) return (next(), true);
+    function match(type: Function) {
+      if (check(type)) {
+        next();
+        return true;
+      }
       return false;
     }
 
-    function check(type) {
+    function check(type: Function) {
       if (isAtEnd()) return false;
       return Token.typeOf(peek(), type);
     }
