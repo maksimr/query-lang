@@ -3,36 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "start": "webpack-dev-server --entry=./src/index.ts --output=./dist/main.js --mode=development --host=0.0.0.0 --devtool=eval-source-map --module-bind='ts=ts-loader' --resolve-extensions='.js,.ts'",
-    "lint": "eslint src/**/*.ts",
     "test": "jest",
     "test:watch": "npm test -- --watch"
-  },
-  "eslintConfig": {
-    "parser": "@typescript-eslint/parser",
-    "plugins": [
-      "@typescript-eslint"
-    ],
-    "parserOptions": {
-      "ecmaVersion": 6,
-      "sourceType": "module"
-    },
-    "globals": {
-      "it": true,
-      "describe": true
-    },
-    "rules": {
-      "@typescript-eslint/no-explicit-any": "error",
-      "semi": "error",
-      "max-depth": "error",
-      "complexity": "error",
-      "no-undef": "error",
-      "no-unused-vars": "error",
-      "no-const-assign": "error",
-      "quotes": [
-        "error",
-        "single"
-      ]
-    }
   },
   "jest": {
     "transform": {
@@ -43,12 +15,9 @@
     "ts-jest": "24.1.0",
     "ts-loader": "6.2.1",
     "typescript": "3.6.4",
-    "@typescript-eslint/parser": "2.6.0",
-    "@typescript-eslint/eslint-plugin": "2.6.0",
     "@types/jasmine": "3.4.5",
     "@types/node": "12.12.5",
     "css-loader": "2.1.0",
-    "eslint": "6.0.1",
     "jest-cli": "24.9.0",
     "jest": "24.9.0",
     "style-loader": "0.23.1",

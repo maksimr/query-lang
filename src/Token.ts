@@ -1,53 +1,67 @@
+export enum TokenType {
+  WHITE_SPACE,
+  COLON,
+  LEFT_PAREN,
+  RIGHT_PAREN,
+  LEFT_BRACE,
+  RIGHT_BRACE,
+  VALUE,
+  OR,
+  AND,
+  NOT,
+}
+
+
 export class Token {
-  static typeOf(token: Token, type: Function) {
+  static typeOf(token: Token, type: TokenType) {
     return token.type === type;
   }
 
-  type: Function;
+  type: TokenType;
   value: string;
 
-  constructor(type: Function, value: string = null) {
+  constructor(type: TokenType, value: string = null) {
     this.type = type;
     this.value = value;
   }
 
   static WHITE_SPACE(value: string) {
-    return new Token(Token.WHITE_SPACE, value);
+    return new Token(TokenType.WHITE_SPACE, value);
   }
 
   static COLON() {
-    return new Token(Token.COLON);
+    return new Token(TokenType.COLON);
   }
 
   static LEFT_PAREN() {
-    return new Token(Token.LEFT_PAREN);
+    return new Token(TokenType.LEFT_PAREN);
   }
 
   static RIGHT_PAREN() {
-    return new Token(Token.RIGHT_PAREN);
+    return new Token(TokenType.RIGHT_PAREN);
   }
 
   static LEFT_BRACE() {
-    return new Token(Token.LEFT_BRACE);
+    return new Token(TokenType.LEFT_BRACE);
   }
 
   static RIGHT_BRACE() {
-    return new Token(Token.RIGHT_BRACE);
+    return new Token(TokenType.RIGHT_BRACE);
   }
 
   static VALUE(value: string) {
-    return new Token(Token.VALUE, value);
+    return new Token(TokenType.VALUE, value);
   }
 
   static OR() {
-    return new Token(Token.OR);
+    return new Token(TokenType.OR);
   }
 
   static AND() {
-    return new Token(Token.AND);
+    return new Token(TokenType.AND);
   }
 
   static NOT() {
-    return new Token(Token.NOT);
+    return new Token(TokenType.NOT);
   }
 }

@@ -1,4 +1,4 @@
-import {Token} from './Token';
+import {Token, TokenType} from './Token';
 import {Lexer} from './Lexer';
 import {Cursor} from './Cursor';
 import {Node} from './Node';
@@ -11,7 +11,7 @@ export class Parser {
   static parse(query: string) {
     const tokens = Lexer.parse(query);
     const cursor = Cursor.from<Token>(tokens.filter((it) => {
-      return !Token.typeOf(it, Token.WHITE_SPACE);
+      return !Token.typeOf(it, TokenType.WHITE_SPACE);
     }));
 
     return Query();
@@ -25,36 +25,36 @@ export class Parser {
 
     function OrExpression() {
       let expr = AndExpression();
-      while (match(Token.OR)) expr = Node.OR(expr, AndExpression());
+      while (match(TokenType.OR)) expr = Node.OR(expr, AndExpression());
       return expr;
     }
 
     function AndExpression() {
       let expr = SignExpression();
-      while (match(Token.AND)) expr = Node.AND(expr, SignExpression());
+      while (match(TokenType.AND)) expr = Node.AND(expr, SignExpression());
       return expr;
     }
 
     function SignExpression() {
-      return (match(Token.NOT) ? Node.NOT(Item()) : Item());
+      return (match(TokenType.NOT) ? Node.NOT(Item()) : Item());
     }
 
     function Item() {
       switch (true) {
-        case (match(Token.VALUE)):
+        case (match(TokenType.VALUE)):
           const token = previous();
           switch (true) {
-            case (match(Token.COLON)):
-              if (match(Token.VALUE)) return (
+            case (match(TokenType.COLON)):
+              if (match(TokenType.VALUE)) return (
                 Node.Field(
                   Node.FieldName(token.value),
                   Node.FieldValue(previous().value)));
 
-            case (match(Token.LEFT_PAREN)):
+            case (match(TokenType.LEFT_PAREN)):
               const fields = [];
-              while (match(Token.VALUE)) {
+              while (match(TokenType.VALUE)) {
                 const nameToken = previous();
-                if (match(Token.COLON) && match(Token.VALUE)) {
+                if (match(TokenType.COLON) && match(TokenType.VALUE)) {
                   const valueToken = previous();
                   fields.push(
                     Node.Field(
@@ -64,7 +64,7 @@ export class Parser {
                 }
                 throw Parser.Error();
               }
-              if (match(Token.RIGHT_PAREN))
+              if (match(TokenType.RIGHT_PAREN))
                 return Node.Tuple(Node.TupleName(token.value), fields);
           }
         default:
@@ -76,7 +76,7 @@ export class Parser {
       return !cursor.hasNext();
     }
 
-    function match(type: Function) {
+    function match(type: TokenType) {
       if (check(type)) {
         next();
         return true;
@@ -84,7 +84,7 @@ export class Parser {
       return false;
     }
 
-    function check(type: Function) {
+    function check(type: TokenType) {
       if (isAtEnd()) return false;
       return Token.typeOf(peek(), type);
     }
