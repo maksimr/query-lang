@@ -8,7 +8,7 @@ export class Lexer {
 
   static parse(str: string): Array<Token> {
     const tokens = [];
-    const cursor = Cursor.from<string>(str.split(''));
+    const cursor = Cursor.from<string>(str);
     while (cursor.hasNext()) {
       const char = cursor.next();
       switch (true) {

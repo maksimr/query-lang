@@ -1,13 +1,13 @@
 export class Cursor<T> {
-  static from<T>(seq: Array<T>) {
+  static from<T>(seq: ArrayLike<T>) {
     return new Cursor<T>(seq);
   }
 
   index: number;
   size: number;
-  seq: Array<T>;
+  seq: ArrayLike<T>;
 
-  constructor(seq: Array<T>, startIndex = 0) {
+  constructor(seq: ArrayLike<T>, startIndex = 0) {
     this.index = startIndex;
     this.size = seq.length;
     this.seq = seq;
