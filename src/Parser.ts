@@ -1,7 +1,8 @@
-import {Token, TokenType} from './Token';
+import {Token} from './Token';
 import {Lexer} from './Lexer';
 import {Cursor} from './Cursor';
 import {Node} from './Node';
+import {TokenType} from './TokenType';
 
 export class Parser {
   static Error(message = 'Unexpected token') {
