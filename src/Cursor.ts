@@ -3,9 +3,9 @@ export class Cursor<T> {
     return new Cursor<T>(seq);
   }
 
-  index: number;
-  size: number;
-  seq: ArrayLike<T>;
+  private index: number;
+  private readonly size: number;
+  private readonly seq: ArrayLike<T>;
 
   constructor(seq: ArrayLike<T>, startIndex = 0) {
     this.index = startIndex;
