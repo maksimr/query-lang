@@ -1,5 +1,5 @@
-import { Lexer } from './Lexer';
-import { Token } from './Token';
+import {Lexer} from './Lexer';
+import {Token} from './Token';
 
 describe('Lexer', function() {
   it('should correctly parse empty string', function() {

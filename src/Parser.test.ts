@@ -1,5 +1,5 @@
-import { Parser } from './Parser';
-import { Node } from './Node';
+import {Parser} from './Parser';
+import {Node} from './Node';
 
 describe('Parser', function() {
   it('should correctly parse empty string', function() {
