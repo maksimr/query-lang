@@ -3,7 +3,7 @@ import {Cursor} from './Cursor';
 
 export class Lexer {
   static parse(query: string): Array<Token> {
-    const tokens = [];
+    const tokens: Array<Token> = [];
     const cursor = Cursor.from<string>(query);
     while (cursor.hasNext()) {
       const char = cursor.next();
