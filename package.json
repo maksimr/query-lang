@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "@types/jasmine": "3.5.0",
-    "@types/node": "12.12.14",
+    "@types/node": "12.12.15",
     "@typescript-eslint/parser": "2.10.0",
     "css-loader": "3.2.1",
     "eslint": "6.7.2",
