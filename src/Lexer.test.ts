@@ -6,10 +6,15 @@ describe('Lexer', function() {
     expect(Lexer.parse('')).toEqual([]);
   });
 
-  it('should preserve spaces', function() {
-    expect(Lexer.parse('  ')).toEqual([
-      Token.WHITE_SPACE(' '),
+  it('should parse space', function() {
+    expect(Lexer.parse(' ')).toEqual([
       Token.WHITE_SPACE(' ')
+    ]);
+  });
+
+  it('should consolidate sequence of spaces', function() {
+    expect(Lexer.parse('  ')).toEqual([
+      Token.WHITE_SPACE('  ')
     ]);
   });
 
@@ -80,9 +85,17 @@ describe('Lexer', function() {
     ]);
   });
 
+  it('should correctly parse a word with dash', function() {
+    expect(Lexer.parse('foo-bar')).toEqual([
+      Token.WORD('foo'),
+      Token.DASH('-'),
+      Token.WORD('bar')
+    ]);
+  });
+
   it('should not throw exception if do not know symbol', function() {
     expect(Lexer.parse('.')).toEqual([
-      Token.WORD('.')
+      Token.PUNCTUATION('.')
     ]);
   });
 });

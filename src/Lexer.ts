@@ -8,6 +8,7 @@ export class Lexer {
     const cursor = Cursor.from<string>(query);
     while (cursor.hasNext()) {
       const char = cursor.next();
+      const spaceRegExp = /\s/;
       switch (true) {
         case (':' === char):
           addToken(Token.COLON());
@@ -27,12 +28,16 @@ export class Lexer {
         case ('"' === char || '\'' === char):
           addToken(Token.QUOTE(char));
           break;
-        case (/\s/.test(char)):
-          addToken(Token.WHITE_SPACE(char));
+        case ('-' === char):
+          addToken(Token.DASH(char));
+          break;
+        case (spaceRegExp.test(char)):
+          const rest = consumeUntil(char => spaceRegExp.test(char));
+          addToken(Token.WHITE_SPACE(char + rest));
           break;
         case (wordRegExp.test(char)): {
-          let value = char;
-          while (cursor.hasNext() && wordRegExp.test(cursor.peek())) value += cursor.next();
+          const rest = consumeUntil(char => wordRegExp.test(char));
+          const value = char + rest;
           switch (value) {
             case 'or':
               addToken(Token.OR(value));
@@ -50,7 +55,7 @@ export class Lexer {
           break;
         }
         default:
-          addToken(Token.WORD(char));
+          addToken(Token.PUNCTUATION(char));
           break;
       }
     }
@@ -59,6 +64,13 @@ export class Lexer {
 
     function addToken(token: Token) {
       tokens.push(token);
+    }
+
+    function consumeUntil(predicateFunc: (it: string) => Boolean) {
+      let value = '';
+      while (cursor.hasNext() && predicateFunc(cursor.peek()))
+        value += cursor.next();
+      return value;
     }
   }
 }
