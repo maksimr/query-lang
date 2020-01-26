@@ -10,6 +10,5 @@ export enum TokenType {
   AND,
   NOT,
   QUOTE,
-  DASH,
   PUNCTUATION,
 }

@@ -57,10 +57,6 @@ export class Token {
     return new Token(TokenType.QUOTE, lexeme);
   }
 
-  static DASH(lexeme: string) {
-    return new Token(TokenType.DASH, lexeme);
-  }
-
   static PUNCTUATION(lexeme: string) {
     return new Token(TokenType.PUNCTUATION, lexeme);
   }

@@ -87,9 +87,7 @@ describe('Lexer', function() {
 
   it('should correctly parse a word with dash', function() {
     expect(Lexer.parse('foo-bar')).toEqual([
-      Token.WORD('foo'),
-      Token.DASH('-'),
-      Token.WORD('bar')
+      Token.WORD('foo-bar')
     ]);
   });
 

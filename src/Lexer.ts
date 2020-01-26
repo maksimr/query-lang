@@ -28,15 +28,12 @@ export class Lexer {
         case ('"' === char || '\'' === char):
           addToken(Token.QUOTE(char));
           break;
-        case ('-' === char):
-          addToken(Token.DASH(char));
-          break;
         case (spaceRegExp.test(char)):
           const rest = consumeUntil(char => spaceRegExp.test(char));
           addToken(Token.WHITE_SPACE(char + rest));
           break;
         case (wordRegExp.test(char)): {
-          const rest = consumeUntil(char => wordRegExp.test(char));
+          const rest = consumeUntil(char => (wordRegExp.test(char) || char === '-'));
           const value = char + rest;
           switch (value) {
             case 'or':
