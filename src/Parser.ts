@@ -46,8 +46,8 @@ export class Parser {
             case (match(TokenType.COLON)):
               if (match(TokenType.WORD)) return (
                 Node.Field(
-                  Node.FieldName(token.value),
-                  Node.FieldValue(previous().value)));
+                  Node.FieldName(token.lexeme),
+                  Node.FieldValue(previous().lexeme)));
 
             case (match(TokenType.LEFT_PAREN)):
               const fields = [];
@@ -57,14 +57,14 @@ export class Parser {
                   const valueToken = previous();
                   fields.push(
                     Node.Field(
-                      Node.FieldName(nameToken.value),
-                      Node.FieldValue(valueToken.value)));
+                      Node.FieldName(nameToken.lexeme),
+                      Node.FieldValue(valueToken.lexeme)));
                   continue;
                 }
                 throw Parser.Error();
               }
               if (match(TokenType.RIGHT_PAREN))
-                return Node.Tuple(Node.TupleName(token.value), fields);
+                return Node.Tuple(Node.TupleName(token.lexeme), fields);
           }
         default:
           throw Parser.Error();

@@ -4,53 +4,58 @@ import {Cursor} from './Cursor';
 export class Lexer {
   static parse(query: string): Array<Token> {
     const tokens: Array<Token> = [];
+    const wordRegExp = /\w/;
     const cursor = Cursor.from<string>(query);
     while (cursor.hasNext()) {
       const char = cursor.next();
       switch (true) {
         case (':' === char):
-          tokens.push(Token.COLON());
+          addToken(Token.COLON());
           break;
         case ('(' === char):
-          tokens.push(Token.LEFT_PAREN());
+          addToken(Token.LEFT_PAREN());
           break;
         case (')' === char):
-          tokens.push(Token.RIGHT_PAREN());
+          addToken(Token.RIGHT_PAREN());
           break;
         case ('{' === char):
-          tokens.push(Token.LEFT_BRACE());
+          addToken(Token.LEFT_BRACE());
           break;
         case ('}' === char):
-          tokens.push(Token.RIGHT_BRACE());
+          addToken(Token.RIGHT_BRACE());
           break;
         case (/\s/.test(char)):
-          tokens.push(Token.WHITE_SPACE(char));
+          addToken(Token.WHITE_SPACE(char));
           break;
-        case (/\w/.test(char)): {
+        case (wordRegExp.test(char)): {
           let value = char;
-          while (cursor.hasNext() && /\w/.test(cursor.peek())) value += cursor.next();
+          while (cursor.hasNext() && wordRegExp.test(cursor.peek())) value += cursor.next();
           switch (value) {
             case 'or':
-              tokens.push(Token.OR());
+              addToken(Token.OR(value));
               break;
             case 'and':
-              tokens.push(Token.AND());
+              addToken(Token.AND(value));
               break;
             case 'not':
-              tokens.push(Token.NOT());
+              addToken(Token.NOT(value));
               break;
             default:
-              tokens.push(Token.WORD(value));
+              addToken(Token.WORD(value));
               break;
           }
           break;
         }
         default:
-          tokens.push(Token.WORD(char));
+          addToken(Token.WORD(char));
           break;
       }
     }
 
     return tokens;
+
+    function addToken(token: Token) {
+      tokens.push(token);
+    }
   }
 }

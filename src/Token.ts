@@ -6,11 +6,11 @@ export class Token {
   }
 
   type: TokenType;
-  value: string;
+  lexeme: string;
 
   constructor(type: TokenType, value: string = null) {
     this.type = type;
-    this.value = value;
+    this.lexeme = value;
   }
 
   static WHITE_SPACE(value: string) {
@@ -37,19 +37,19 @@ export class Token {
     return new Token(TokenType.RIGHT_BRACE);
   }
 
-  static WORD(value: string) {
-    return new Token(TokenType.WORD, value);
+  static WORD(lexeme: string) {
+    return new Token(TokenType.WORD, lexeme);
   }
 
-  static OR() {
-    return new Token(TokenType.OR);
+  static OR(lexeme: string) {
+    return new Token(TokenType.OR, lexeme);
   }
 
-  static AND() {
-    return new Token(TokenType.AND);
+  static AND(lexeme: string) {
+    return new Token(TokenType.AND, lexeme);
   }
 
-  static NOT() {
-    return new Token(TokenType.NOT);
+  static NOT(lexeme: string) {
+    return new Token(TokenType.NOT, lexeme);
   }
 }

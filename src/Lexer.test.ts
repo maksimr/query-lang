@@ -28,9 +28,9 @@ describe('Lexer', function() {
   });
 
   it('should correctly parse reserved keywords', function() {
-    expect(Lexer.parse('or')).toEqual([Token.OR()]);
-    expect(Lexer.parse('and')).toEqual([Token.AND()]);
-    expect(Lexer.parse('not')).toEqual([Token.NOT()]);
+    expect(Lexer.parse('or')).toEqual([Token.OR('or')]);
+    expect(Lexer.parse('and')).toEqual([Token.AND('and')]);
+    expect(Lexer.parse('not')).toEqual([Token.NOT('not')]);
   });
 
   it('should correctly parse word', function() {
