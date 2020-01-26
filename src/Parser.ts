@@ -40,20 +40,20 @@ export class Parser {
 
     function Item() {
       switch (true) {
-        case (match(TokenType.VALUE)):
+        case (match(TokenType.WORD)):
           const token = previous();
           switch (true) {
             case (match(TokenType.COLON)):
-              if (match(TokenType.VALUE)) return (
+              if (match(TokenType.WORD)) return (
                 Node.Field(
                   Node.FieldName(token.value),
                   Node.FieldValue(previous().value)));
 
             case (match(TokenType.LEFT_PAREN)):
               const fields = [];
-              while (match(TokenType.VALUE)) {
+              while (match(TokenType.WORD)) {
                 const nameToken = previous();
-                if (match(TokenType.COLON) && match(TokenType.VALUE)) {
+                if (match(TokenType.COLON) && match(TokenType.WORD)) {
                   const valueToken = previous();
                   fields.push(
                     Node.Field(

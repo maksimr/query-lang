@@ -40,13 +40,13 @@ export class Lexer {
               tokens.push(Token.NOT());
               break;
             default:
-              tokens.push(Token.VALUE(value));
+              tokens.push(Token.WORD(value));
               break;
           }
           break;
         }
         default:
-          tokens.push(Token.VALUE(char));
+          tokens.push(Token.WORD(char));
           break;
       }
     }

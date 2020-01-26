@@ -33,44 +33,44 @@ describe('Lexer', function() {
     expect(Lexer.parse('not')).toEqual([Token.NOT()]);
   });
 
-  it('should correctly parse value', function() {
-    expect(Lexer.parse('foo')).toEqual([Token.VALUE('foo')]);
+  it('should correctly parse word', function() {
+    expect(Lexer.parse('foo')).toEqual([Token.WORD('foo')]);
   });
 
-  it('should correctly parse value inside curly braces', function() {
+  it('should correctly parse word inside curly braces', function() {
     expect(Lexer.parse('{foo}')).toEqual([
       Token.LEFT_BRACE(),
-      Token.VALUE('foo'),
+      Token.WORD('foo'),
       Token.RIGHT_BRACE()
     ]);
     expect(Lexer.parse('{foo bar}')).toEqual([
       Token.LEFT_BRACE(),
-      Token.VALUE('foo'),
+      Token.WORD('foo'),
       Token.WHITE_SPACE(' '),
-      Token.VALUE('bar'),
+      Token.WORD('bar'),
       Token.RIGHT_BRACE()
     ]);
   });
 
   it('should correctly parse a query with field name and field value', function() {
     expect(Lexer.parse('foo: bar')).toEqual([
-      Token.VALUE('foo'),
+      Token.WORD('foo'),
       Token.COLON(),
       Token.WHITE_SPACE(' '),
-      Token.VALUE('bar')
+      Token.WORD('bar')
     ]);
   });
 
   it('should not throw exception if do not know symbol', function() {
     expect(Lexer.parse('.')).toEqual([
-      Token.VALUE('.')
+      Token.WORD('.')
     ]);
   });
 
   it('should correctly parse incomplete string', function() {
     expect(Lexer.parse('"foo')).toEqual([
-      Token.VALUE('"'),
-      Token.VALUE('foo')
+      Token.WORD('"'),
+      Token.WORD('foo')
     ]);
   });
 });

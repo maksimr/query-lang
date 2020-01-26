@@ -37,8 +37,8 @@ export class Token {
     return new Token(TokenType.RIGHT_BRACE);
   }
 
-  static VALUE(value: string) {
-    return new Token(TokenType.VALUE, value);
+  static WORD(value: string) {
+    return new Token(TokenType.WORD, value);
   }
 
   static OR() {

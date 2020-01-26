@@ -5,7 +5,7 @@ export enum TokenType {
   RIGHT_PAREN,
   LEFT_BRACE,
   RIGHT_BRACE,
-  VALUE,
+  WORD,
   OR,
   AND,
   NOT,
