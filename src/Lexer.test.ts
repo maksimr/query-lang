@@ -8,13 +8,13 @@ describe('Lexer', function() {
 
   it('should parse space', function() {
     expect(Lexer.parse(' ')).toEqual([
-      Token.WHITE_SPACE(' ')
+      Token.SPACE(' ')
     ]);
   });
 
   it('should consolidate sequence of spaces', function() {
     expect(Lexer.parse('  ')).toEqual([
-      Token.WHITE_SPACE('  ')
+      Token.SPACE('  ')
     ]);
   });
 
@@ -51,7 +51,7 @@ describe('Lexer', function() {
     expect(Lexer.parse('{foo bar}')).toEqual([
       Token.LEFT_BRACE(),
       Token.WORD('foo'),
-      Token.WHITE_SPACE(' '),
+      Token.SPACE(' '),
       Token.WORD('bar'),
       Token.RIGHT_BRACE()
     ]);
@@ -61,7 +61,7 @@ describe('Lexer', function() {
     expect(Lexer.parse('foo: bar')).toEqual([
       Token.WORD('foo'),
       Token.COLON(),
-      Token.WHITE_SPACE(' '),
+      Token.SPACE(' '),
       Token.WORD('bar')
     ]);
   });

@@ -11,7 +11,7 @@ export class Parser {
 
   static parse(query: string) {
     const tokens = Lexer.parse(query);
-    const cursor = Cursor.from<Token>(tokens.filter((it) => !Token.typeOf(it, TokenType.WHITE_SPACE)));
+    const cursor = Cursor.from<Token>(tokens.filter((it) => !Token.typeOf(it, TokenType.SPACE)));
 
     return Query();
 

@@ -30,7 +30,7 @@ export class Lexer {
           break;
         case (spaceRegExp.test(char)):
           const rest = consumeUntil(char => spaceRegExp.test(char));
-          addToken(Token.WHITE_SPACE(char + rest));
+          addToken(Token.SPACE(char + rest));
           break;
         case (wordRegExp.test(char)): {
           const rest = consumeUntil(char => (wordRegExp.test(char) || char === '-'));

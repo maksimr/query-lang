@@ -1,5 +1,5 @@
 export enum TokenType {
-  WHITE_SPACE,
+  SPACE,
   COLON,
   LEFT_PAREN,
   RIGHT_PAREN,

@@ -13,8 +13,8 @@ export class Token {
     this.lexeme = value;
   }
 
-  static WHITE_SPACE(value: string) {
-    return new Token(TokenType.WHITE_SPACE, value);
+  static SPACE(value: string) {
+    return new Token(TokenType.SPACE, value);
   }
 
   static COLON() {
