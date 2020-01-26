@@ -61,16 +61,28 @@ describe('Lexer', function() {
     ]);
   });
 
-  it('should not throw exception if do not know symbol', function() {
-    expect(Lexer.parse('.')).toEqual([
-      Token.WORD('.')
+  it('should parse double quote', function() {
+    expect(Lexer.parse('"')).toEqual([
+      Token.QUOTE('"')
+    ]);
+  });
+
+  it('should parse single quote', function() {
+    expect(Lexer.parse('\'')).toEqual([
+      Token.QUOTE('\'')
     ]);
   });
 
   it('should correctly parse incomplete string', function() {
     expect(Lexer.parse('"foo')).toEqual([
-      Token.WORD('"'),
+      Token.QUOTE('"'),
       Token.WORD('foo')
+    ]);
+  });
+
+  it('should not throw exception if do not know symbol', function() {
+    expect(Lexer.parse('.')).toEqual([
+      Token.WORD('.')
     ]);
   });
 });

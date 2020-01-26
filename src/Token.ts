@@ -52,4 +52,8 @@ export class Token {
   static NOT(lexeme: string) {
     return new Token(TokenType.NOT, lexeme);
   }
+
+  static QUOTE(lexeme: string) {
+    return new Token(TokenType.QUOTE, lexeme);
+  }
 }

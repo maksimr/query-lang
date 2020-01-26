@@ -24,6 +24,9 @@ export class Lexer {
         case ('}' === char):
           addToken(Token.RIGHT_BRACE());
           break;
+        case ('"' === char || '\'' === char):
+          addToken(Token.QUOTE(char));
+          break;
         case (/\s/.test(char)):
           addToken(Token.WHITE_SPACE(char));
           break;

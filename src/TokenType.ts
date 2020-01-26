@@ -9,4 +9,5 @@ export enum TokenType {
   OR,
   AND,
   NOT,
+  QUOTE,
 }
