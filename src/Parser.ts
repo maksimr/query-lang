@@ -24,13 +24,15 @@ export class Parser {
 
     function OrExpression() {
       let expr = AndExpression();
-      while (match(TokenType.OR)) expr = Node.OR(expr, AndExpression());
+      while (match(TokenType.OR))
+        expr = Node.OR(expr, AndExpression());
       return expr;
     }
 
     function AndExpression() {
       let expr = AndOperand();
-      while (match(TokenType.AND)) expr = Node.AND(expr, AndOperand());
+      while (match(TokenType.AND))
+        expr = Node.AND(expr, AndOperand());
       return expr;
     }
 
@@ -44,13 +46,16 @@ export class Parser {
 
     function CategorizedFilter() {
       const attribute = Attribute();
-      if (!match(TokenType.COLON)) throw Parser.Error();
-      return Node.Field(attribute, AttributeFilter());
+      if (match(TokenType.COLON))
+        return Node.Field(attribute, AttributeFilter());
+      throw Parser.Error();
     }
 
     function Attribute() {
-      if (!match(TokenType.WORD)) throw Parser.Error();
-      return Node.FieldName(previous().lexeme);
+      let token = match(TokenType.WORD);
+      if (token)
+        return Node.FieldName(token.lexeme);
+      throw Parser.Error();
     }
 
     function AttributeFilter() {
@@ -62,37 +67,23 @@ export class Parser {
     }
 
     function SimpleValue() {
-      if (!match(TokenType.WORD)) throw Parser.Error();
-      return Node.FieldValue(previous().lexeme);
+      let token = match(TokenType.WORD);
+      if (token)
+        return Node.FieldValue(token.lexeme);
+      throw Parser.Error();
     }
 
     function isAtEnd() {
       return !cursor.hasNext();
     }
 
-    function match(type: TokenType) {
-      if (check(type)) {
-        next();
-        return true;
-      }
-      return false;
+    function match(type: TokenType): Token {
+      return check(type) ? cursor.next() : null;
     }
 
     function check(type: TokenType) {
       if (isAtEnd()) return false;
-      return Token.typeOf(peek(), type);
-    }
-
-    function previous() {
-      return cursor.previous();
-    }
-
-    function next() {
-      return cursor.next();
-    }
-
-    function peek() {
-      return cursor.peek();
+      return Token.typeOf(cursor.peek(), type);
     }
   }
 }
