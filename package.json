@@ -29,7 +29,7 @@
     }
   },
   "devDependencies": {
-    "@types/jasmine": "3.5.1",
+    "@types/jasmine": "3.5.2",
     "@types/node": "12.12.25",
     "@typescript-eslint/parser": "2.18.0",
     "css-loader": "3.4.2",
