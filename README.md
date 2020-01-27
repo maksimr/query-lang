@@ -7,7 +7,7 @@
     <AndExpression> ::= <AndOperand> ('and' <AndOperand>)*
     <AndOperand> ::= '('<OrExpression>? ')' | <Term>
     <Term> ::= <QuotedText> | <NegativeText> | <PositiveValue> | <NegativeValue> | <Sort> | <Has> | <CategorizedFilter> | <Text>
-    <QuotedText> ::= '"' TEXT WITHOUT QUOTES '"'
+    <QuotedText> ::= '"' TEXT WITHOUT QUOTES '"' | ''' TEXT WITHOUT QUOTES '''
     <NegativeText> ::= '-'<QuotedText>
     <PositiveValue> ::= '#'<Value>
     <NegativeValue> ::= '-'<Value>
