@@ -16,23 +16,20 @@ export class Parser {
     return SearchQuery();
 
     function SearchQuery() {
-      if (isAtEnd()) return null;
-      const expr = OrExpression();
-      if (!isAtEnd()) throw Parser.Error();
-      return expr;
+      return isAtEnd() ? null : OrExpression();
     }
 
     function OrExpression() {
       let expr = AndExpression();
       while (match(TokenType.OR))
-        expr = Node.OR(expr, AndExpression());
+        expr = Node.OrExpression(expr, AndExpression());
       return expr;
     }
 
     function AndExpression() {
       let expr = AndOperand();
       while (match(TokenType.AND))
-        expr = Node.AND(expr, AndOperand());
+        expr = Node.AndExpression(expr, AndOperand());
       return expr;
     }
 
@@ -47,14 +44,14 @@ export class Parser {
     function CategorizedFilter() {
       const attribute = Attribute();
       if (match(TokenType.COLON))
-        return Node.Field(attribute, AttributeFilter());
+        return Node.CategorizedFilter(attribute, AttributeFilter());
       throw Parser.Error();
     }
 
     function Attribute() {
       let token = match(TokenType.WORD);
       if (token)
-        return Node.FieldName(token.lexeme);
+        return Node.Attribute(token.lexeme);
       throw Parser.Error();
     }
 
@@ -69,12 +66,8 @@ export class Parser {
     function SimpleValue() {
       let token = match(TokenType.WORD);
       if (token)
-        return Node.FieldValue(token.lexeme);
+        return Node.SimpleValue(token.lexeme);
       throw Parser.Error();
-    }
-
-    function isAtEnd() {
-      return !cursor.hasNext();
     }
 
     function match(type: TokenType): Token {
@@ -84,6 +77,10 @@ export class Parser {
     function check(type: TokenType) {
       if (isAtEnd()) return false;
       return Token.typeOf(cursor.peek(), type);
+    }
+
+    function isAtEnd() {
+      return !cursor.hasNext();
     }
   }
 }

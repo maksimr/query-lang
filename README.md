@@ -3,7 +3,7 @@
 
 ```xml
     <SearchQuery> ::= <OrExpression>
-    <OrExpession> ::= <AndExpression> ('or' <AndExpression>)*
+    <OrExpression> ::= <AndExpression> ('or' <AndExpression>)*
     <AndExpression> ::= <AndOperand> ('and' <AndOperand>)*
     <AndOperand> ::= '('<OrExpression>? ')' | <Term>
     <Term> ::= <QuotedText> | <NegativeText> | <PositiveValue> | <NegativeValue> | <Sort> | <Has> | <CategorizedFilter> | <Text>
