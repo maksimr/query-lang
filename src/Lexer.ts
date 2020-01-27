@@ -42,9 +42,6 @@ export class Lexer {
             case 'and':
               addToken(Token.AND(value));
               break;
-            case 'not':
-              addToken(Token.NOT(value));
-              break;
             default:
               addToken(Token.WORD(value));
               break;

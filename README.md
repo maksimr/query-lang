@@ -2,7 +2,7 @@
 
 
 ```xml
-    <SearchRequest> ::= <OrExpression>
+    <SearchQuery> ::= <OrExpression>
     <OrExpession> ::= <AndExpression> ('or' <AndExpression>)*
     <AndExpression> ::= <AndOperand> ('and' <AndOperand>)*
     <AndOperand> ::= '('<OrExpression>? ')' | <Term>

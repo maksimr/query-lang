@@ -8,7 +8,6 @@ export enum TokenType {
   WORD,
   OR,
   AND,
-  NOT,
   QUOTE,
   PUNCTUATION,
 }

@@ -13,15 +13,6 @@ describe('Parser', function() {
     ));
   });
 
-  it('should correctly parse Not expression', function() {
-    expect(Parser.parse('not foo: bar')).toEqual(Node.NOT(
-      Node.Field(
-        Node.FieldName('foo'),
-        Node.FieldValue('bar')
-      )
-    ));
-  });
-
   it('should correctly parse "or" expression', function() {
     expect(Parser.parse('foo: bar or bar: foo')).toEqual(Node.OR(
       Node.Field(Node.FieldName('foo'), Node.FieldValue('bar')),
@@ -54,23 +45,6 @@ describe('Parser', function() {
       ),
       Node.Field(Node.FieldName('zoo'), Node.FieldValue('moo'))
     ));
-  });
-
-  it('should correctly parse empty Tuple expression', function() {
-    expect(Parser.parse('foo()')).toEqual(Node.Tuple(Node.TupleName('foo'), []));
-  });
-
-  it('should correctly parse Tuple expression with one field', function() {
-    expect(Parser.parse('foo(bar: zoo)')).toEqual(Node.Tuple(Node.TupleName('foo'), [
-      Node.Field(Node.FieldName('bar'), Node.FieldValue('zoo'))
-    ]));
-  });
-
-  it('should correctly parse Tuple expression with multiple fields', function() {
-    expect(Parser.parse('foo(bar: zoo moo: doo)')).toEqual(Node.Tuple(Node.TupleName('foo'), [
-      Node.Field(Node.FieldName('bar'), Node.FieldValue('zoo')),
-      Node.Field(Node.FieldName('moo'), Node.FieldValue('doo'))
-    ]));
   });
 
   describe('Error', function() {

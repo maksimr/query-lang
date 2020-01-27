@@ -15,18 +15,6 @@ export class Node {
     return new Node(Node.AND, [xExpr, yExpr]);
   }
 
-  static NOT(xExpr: Node) {
-    return new Node(Node.NOT, xExpr);
-  }
-
-  static Tuple(nameExpr: Node, fieldList: Array<Node>) {
-    return new Node(Node.Tuple, [nameExpr, fieldList]);
-  }
-
-  static TupleName(name: string) {
-    return new Node(Node.TupleName, name);
-  }
-
   static Field(nameExpr: Node, valueExpr: Node) {
     return new Node(Node.Field, [nameExpr, valueExpr]);
   }

@@ -13,9 +13,9 @@ export class Parser {
     const tokens = Lexer.parse(query);
     const cursor = Cursor.from<Token>(tokens.filter((it) => !Token.typeOf(it, TokenType.SPACE)));
 
-    return Query();
+    return SearchQuery();
 
-    function Query() {
+    function SearchQuery() {
       if (isAtEnd()) return null;
       const expr = OrExpression();
       if (!isAtEnd()) throw Parser.Error();
@@ -29,46 +29,41 @@ export class Parser {
     }
 
     function AndExpression() {
-      let expr = SignExpression();
-      while (match(TokenType.AND)) expr = Node.AND(expr, SignExpression());
+      let expr = AndOperand();
+      while (match(TokenType.AND)) expr = Node.AND(expr, AndOperand());
       return expr;
     }
 
-    function SignExpression() {
-      return (match(TokenType.NOT) ? Node.NOT(Item()) : Item());
+    function AndOperand() {
+      return Term();
     }
 
-    function Item() {
-      switch (true) {
-        case (match(TokenType.WORD)):
-          const token = previous();
-          switch (true) {
-            case (match(TokenType.COLON)):
-              if (match(TokenType.WORD)) return (
-                Node.Field(
-                  Node.FieldName(token.lexeme),
-                  Node.FieldValue(previous().lexeme)));
+    function Term() {
+      return CategorizedFilter();
+    }
 
-            case (match(TokenType.LEFT_PAREN)):
-              const fields = [];
-              while (match(TokenType.WORD)) {
-                const nameToken = previous();
-                if (match(TokenType.COLON) && match(TokenType.WORD)) {
-                  const valueToken = previous();
-                  fields.push(
-                    Node.Field(
-                      Node.FieldName(nameToken.lexeme),
-                      Node.FieldValue(valueToken.lexeme)));
-                  continue;
-                }
-                throw Parser.Error();
-              }
-              if (match(TokenType.RIGHT_PAREN))
-                return Node.Tuple(Node.TupleName(token.lexeme), fields);
-          }
-        default:
-          throw Parser.Error();
-      }
+    function CategorizedFilter() {
+      const attribute = Attribute();
+      if (!match(TokenType.COLON)) throw Parser.Error();
+      return Node.Field(attribute, AttributeFilter());
+    }
+
+    function Attribute() {
+      if (!match(TokenType.WORD)) throw Parser.Error();
+      return Node.FieldName(previous().lexeme);
+    }
+
+    function AttributeFilter() {
+      return Value();
+    }
+
+    function Value() {
+      return SimpleValue();
+    }
+
+    function SimpleValue() {
+      if (!match(TokenType.WORD)) throw Parser.Error();
+      return Node.FieldValue(previous().lexeme);
     }
 
     function isAtEnd() {

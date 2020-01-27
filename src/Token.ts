@@ -49,10 +49,6 @@ export class Token {
     return new Token(TokenType.AND, lexeme);
   }
 
-  static NOT(lexeme: string) {
-    return new Token(TokenType.NOT, lexeme);
-  }
-
   static QUOTE(lexeme: string) {
     return new Token(TokenType.QUOTE, lexeme);
   }
