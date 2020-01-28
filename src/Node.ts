@@ -30,4 +30,8 @@ export class Node {
   static QuoteText(value: string) {
     return new Node(Node.QuoteText, value);
   }
+
+  static NegativeText(value: Node) {
+    return new Node(Node.NegativeText, value);
+  }
 }

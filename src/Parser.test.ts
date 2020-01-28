@@ -58,4 +58,10 @@ describe('Parser', function() {
       Node.QuoteText('foo')
     );
   });
+
+  it('should parse negative text', function() {
+    expect(Parser.parse('-"foo"')).toEqual(
+      Node.NegativeText(Node.QuoteText('foo'))
+    );
+  });
 });

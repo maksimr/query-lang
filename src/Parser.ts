@@ -38,10 +38,14 @@ export class Parser {
     }
 
     function Term() {
-      if (match(TokenType.QUOTE)) {
-        return QuoteText();
+      switch (true) {
+        case (Boolean(match(TokenType.QUOTE))):
+          return QuoteText();
+        case (Boolean(match(TokenType.MINUS) && match(TokenType.QUOTE))):
+          return NegativeText();
+        default:
+          return CategorizedFilter();
       }
-      return CategorizedFilter();
     }
 
     function QuoteText() {
@@ -51,6 +55,11 @@ export class Parser {
         text += token.lexeme;
       }
       return Node.QuoteText(text);
+    }
+
+
+    function NegativeText() {
+      return Node.NegativeText(QuoteText());
     }
 
     function CategorizedFilter() {

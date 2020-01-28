@@ -28,6 +28,9 @@ export class Lexer {
         case ('"' === char || '\'' === char):
           addToken(Token.QUOTE(char));
           break;
+        case ('-' === char):
+          addToken(Token.MINUS(char));
+          break;
         case (spaceRegExp.test(char)):
           const rest = consumeUntil(char => spaceRegExp.test(char));
           addToken(Token.SPACE(char + rest));

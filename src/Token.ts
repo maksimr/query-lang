@@ -56,4 +56,8 @@ export class Token {
   static PUNCTUATION(lexeme: string) {
     return new Token(TokenType.PUNCTUATION, lexeme);
   }
+
+  static MINUS(lexeme: string) {
+    return new Token(TokenType.MINUS, lexeme);
+  }
 }

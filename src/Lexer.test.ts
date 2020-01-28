@@ -95,4 +95,10 @@ describe('Lexer', function() {
       Token.PUNCTUATION('.')
     ]);
   });
+
+  it('should parse minus sign', function() {
+    expect(Lexer.parse('-')).toEqual([
+      Token.MINUS('-')
+    ]);
+  });
 });
