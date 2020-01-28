@@ -38,7 +38,19 @@ export class Parser {
     }
 
     function Term() {
+      if (match(TokenType.QUOTE)) {
+        return QuoteText();
+      }
       return CategorizedFilter();
+    }
+
+    function QuoteText() {
+      let text = '';
+      while (!match(TokenType.QUOTE) && !isAtEnd()) {
+        const token = cursor.next();
+        text += token.lexeme;
+      }
+      return Node.QuoteText(text);
     }
 
     function CategorizedFilter() {

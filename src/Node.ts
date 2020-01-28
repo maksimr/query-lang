@@ -26,4 +26,8 @@ export class Node {
   static SimpleValue(value: string) {
     return new Node(Node.SimpleValue, value);
   }
+
+  static QuoteText(value: string) {
+    return new Node(Node.QuoteText, value);
+  }
 }

@@ -46,4 +46,16 @@ describe('Parser', function() {
       Node.CategorizedFilter(Node.Attribute('zoo'), Node.SimpleValue('moo'))
     ));
   });
+
+  it('should parse double quoted text', function() {
+    expect(Parser.parse('"foo"')).toEqual(
+      Node.QuoteText('foo')
+    );
+  });
+
+  it('should parse single quoted text', function() {
+    expect(Parser.parse('\'foo\'')).toEqual(
+      Node.QuoteText('foo')
+    );
+  });
 });
