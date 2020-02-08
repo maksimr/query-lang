@@ -1,0 +1,14 @@
+export enum TokenType {
+  SPACE,
+  COLON,
+  LEFT_PAREN,
+  RIGHT_PAREN,
+  LEFT_BRACE,
+  RIGHT_BRACE,
+  WORD,
+  OR,
+  AND,
+  QUOTE,
+  MINUS,
+  PUNCTUATION,
+}

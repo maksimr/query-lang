@@ -2,10 +2,10 @@ import {Token} from './Token';
 import {Cursor} from './Cursor';
 
 export class Lexer {
-  static parse(query) {
-    const tokens = [];
+  static parse(query: string): Array<Token> {
+    const tokens: Array<Token> = [];
     const wordRegExp = /\w/;
-    const cursor = Cursor.from(query);
+    const cursor = Cursor.from<string>(query);
     while (cursor.hasNext()) {
       const char = cursor.next();
       const spaceRegExp = /\s/;
@@ -59,11 +59,11 @@ export class Lexer {
 
     return tokens;
 
-    function addToken(token) {
+    function addToken(token: Token) {
       tokens.push(token);
     }
 
-    function consumeUntil(predicateFunc) {
+    function consumeUntil(predicateFunc: (it: string) => Boolean) {
       let value = '';
       while (cursor.hasNext() && predicateFunc(cursor.peek()))
         value += cursor.next();
