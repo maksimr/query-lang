@@ -1,6 +1,6 @@
 import {Parser} from './Parser';
 
-function main(): void {
+function main() {
   Parser.parse('foo: bar');
 }
 

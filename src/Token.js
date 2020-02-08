@@ -1,19 +1,16 @@
 import {TokenType} from './TokenType';
 
 export class Token {
-  static typeOf(token: Token, type: TokenType) {
+  static typeOf(token, type) {
     return token.type === type;
   }
 
-  type: TokenType;
-  lexeme: string;
-
-  constructor(type: TokenType, value: string = null) {
+  constructor(type, value = null) {
     this.type = type;
     this.lexeme = value;
   }
 
-  static SPACE(value: string) {
+  static SPACE(value) {
     return new Token(TokenType.SPACE, value);
   }
 
@@ -37,27 +34,27 @@ export class Token {
     return new Token(TokenType.RIGHT_BRACE);
   }
 
-  static WORD(lexeme: string) {
+  static WORD(lexeme) {
     return new Token(TokenType.WORD, lexeme);
   }
 
-  static OR(lexeme: string) {
+  static OR(lexeme) {
     return new Token(TokenType.OR, lexeme);
   }
 
-  static AND(lexeme: string) {
+  static AND(lexeme) {
     return new Token(TokenType.AND, lexeme);
   }
 
-  static QUOTE(lexeme: string) {
+  static QUOTE(lexeme) {
     return new Token(TokenType.QUOTE, lexeme);
   }
 
-  static PUNCTUATION(lexeme: string) {
+  static PUNCTUATION(lexeme) {
     return new Token(TokenType.PUNCTUATION, lexeme);
   }
 
-  static MINUS(lexeme: string) {
+  static MINUS(lexeme) {
     return new Token(TokenType.MINUS, lexeme);
   }
 }

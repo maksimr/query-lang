@@ -1,37 +1,34 @@
 export class Node {
-  type: Function;
-  value: any;
-
-  constructor(type: Function, value: any) {
+  constructor(type, value) {
     this.type = type;
     this.value = value;
   }
 
-  static OrExpression(xExpr: Node, yExpr: Node) {
+  static OrExpression(xExpr, yExpr) {
     return new Node(Node.OrExpression, [xExpr, yExpr]);
   }
 
-  static AndExpression(xExpr: Node, yExpr: Node) {
+  static AndExpression(xExpr, yExpr) {
     return new Node(Node.AndExpression, [xExpr, yExpr]);
   }
 
-  static CategorizedFilter(nameExpr: Node, valueExpr: Node) {
+  static CategorizedFilter(nameExpr, valueExpr) {
     return new Node(Node.CategorizedFilter, [nameExpr, valueExpr]);
   }
 
-  static Attribute(name: string) {
+  static Attribute(name) {
     return new Node(Node.Attribute, name);
   }
 
-  static SimpleValue(value: string) {
+  static SimpleValue(value) {
     return new Node(Node.SimpleValue, value);
   }
 
-  static QuoteText(value: string) {
+  static QuoteText(value) {
     return new Node(Node.QuoteText, value);
   }
 
-  static NegativeText(value: Node) {
+  static NegativeText(value) {
     return new Node(Node.NegativeText, value);
   }
 }
