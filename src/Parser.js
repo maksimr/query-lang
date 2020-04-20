@@ -9,9 +9,14 @@ export class Parser {
     return Error(message);
   }
 
-  static parse(query: string) {
+  /**
+   *
+   * @param {string} query
+   * @return {null}
+   */
+  static parse(query) {
     const tokens = Lexer.parse(query);
-    const cursor = Cursor.from<Token>(tokens.filter((it) => !Token.typeOf(it, TokenType.SPACE)));
+    const cursor = Cursor.from(tokens.filter((it) => !Token.typeOf(it, TokenType.SPACE)));
 
     return SearchQuery();
 
@@ -91,11 +96,19 @@ export class Parser {
       throw Parser.Error();
     }
 
-    function match(type: TokenType): Token {
+    /**
+     * @param {TokenType} type
+     * @return {*}
+     */
+    function match(type) {
       return check(type) ? cursor.next() : null;
     }
 
-    function check(type: TokenType) {
+    /**
+     * @param {TokenType} type
+     * @return {boolean}
+     */
+    function check(type) {
       if (isAtEnd()) return false;
       return Token.typeOf(cursor.peek(), type);
     }
