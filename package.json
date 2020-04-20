@@ -5,7 +5,8 @@
     "start": "webpack-dev-server --entry=./src/index.js --output=./dist/main.js --mode=development --host=0.0.0.0 --devtool=eval-source-map",
     "test": "jest",
     "test:watch": "npm test -- --watch",
-    "lint": "eslint src/**/*.js"
+    "test:type": "tsc",
+    "lint": "eslint lib/**/*.js"
   },
   "eslintConfig": {
     "parserOptions": {
@@ -47,18 +48,16 @@
     ]
   },
   "devDependencies": {
-    "@types/jasmine": "3.5.3",
-    "@types/node": "12.12.26",
     "@types/jest": "25.2.1",
     "css-loader": "3.4.2",
     "eslint": "6.8.0",
     "@babel/core": "7.9.0",
     "@babel/plugin-transform-runtime": "7.9.0",
     "@babel/preset-env": "7.9.5",
-    "jest": "25.1.0",
-    "jest-cli": "25.1.0",
+    "jest": "25.4.0",
+    "jest-cli": "25.4.0",
     "style-loader": "1.1.3",
-    "typescript": "3.7.5",
+    "typescript": "3.8.3",
     "webpack": "4.41.5",
     "webpack-cli": "3.3.10",
     "webpack-dev-server": "3.10.3"

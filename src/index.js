@@ -1,4 +1,4 @@
-import {Parser} from './Parser';
+import {Parser} from '../lib/Parser';
 
 function main() {
   Parser.parse('foo: bar');
