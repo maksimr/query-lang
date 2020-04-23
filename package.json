@@ -1,5 +1,5 @@
 {
-  "name": "query-input",
+  "name": "query-lang",
   "version": "0.0.0",
   "scripts": {
     "start": "webpack-dev-server --entry=./src/index.js --output=./dist/main.js --mode=development --host=0.0.0.0 --devtool=eval-source-map",
